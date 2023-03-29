@@ -14,4 +14,4 @@ App\Entity\User:
   itemOperations:
     get:
       method: GET
-      security: is_granted("USER_READ", object)
+      # security: is_granted("USER_READ", object)
