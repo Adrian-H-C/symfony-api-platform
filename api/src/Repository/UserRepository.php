@@ -34,14 +34,14 @@ class UserRepository extends BaseRepository
         return $user;
     }
 
-    // public function findOneInactiveByIdAndTokenOrFail(string $id, string $token): User
-    // {
-    //     if (null === $user = $this->objectRepository->findOneBy(['id' => $id, 'token' => $token, 'active' => false])) {
-    //         throw UserNotFoundException::fromUserIdAndToken($id, $token);
-    //     }
+    public function findOneInactiveByIdAndTokenOrFail(string $id, string $token): User
+    {
+        if (null === $user = $this->objectRepository->findOneBy(['id' => $id, 'token' => $token, 'active' => false])) {
+            throw UserNotFoundException::fromUserIdAndToken($id, $token);
+        }
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     // public function findOneByIdAndResetPasswordToken(string $id, string $resetPasswordToken): User
     // {

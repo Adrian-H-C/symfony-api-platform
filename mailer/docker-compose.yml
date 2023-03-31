@@ -53,6 +53,17 @@ services:
       # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
 
+  symfony-api-platform-mailcatcher:
+    container_name: symfony-api-platform-mailcatcher
+    image: schickling/mailcatcher
+    ports:
+      - 1080:1080
+      - 1025:1025
+    depends_on:
+      - symfony-api-platform-mailer-db
+    networks:
+      - symfony-api-platform-network
+
 volumes:
 
 ###> doctrine/doctrine-bundle ###

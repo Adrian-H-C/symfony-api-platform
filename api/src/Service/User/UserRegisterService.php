@@ -20,16 +20,16 @@ class UserRegisterService
 {
     private UserRepository $userRepository;
     private EncoderService $encoderService;
-    // private MessageBusInterface $messageBus;
+    private MessageBusInterface $messageBus;
 
     public function __construct(
         UserRepository $userRepository,
-        EncoderService $encoderService/* , */
-        // MessageBusInterface $messageBus
+        EncoderService $encoderService,
+        MessageBusInterface $messageBus
     ) {
         $this->userRepository = $userRepository;
         $this->encoderService = $encoderService;
-        // $this->messageBus = $messageBus;
+        $this->messageBus = $messageBus;
     }
 
     // Borrar todo esto*********************}
@@ -47,6 +47,11 @@ class UserRegisterService
         } catch (ORMException $e) {
             throw UserAlreadyExistException::fromEmail($email);
         }
+
+        $this->messageBus->dispatch(
+            new UserRegisteredMessage($user->getId(), $user->getName(), $user->getEmail(), $user->getToken()),
+            [new AmqpStamp(RoutingKey::USER_QUEUE)]
+        );
 
         return $user;
     }

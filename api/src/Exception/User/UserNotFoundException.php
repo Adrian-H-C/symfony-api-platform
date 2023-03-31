@@ -15,10 +15,10 @@ class UserNotFoundException extends NotFoundHttpException
         throw new self(\sprintf(self::MESSAGE, $email));
     }
 
-    // public static function fromUserIdAndToken(string $id, string $token): self
-    // {
-    //     throw new self(\sprintf('User with id %s and token %s not found', $id, $token));
-    // }
+    public static function fromUserIdAndToken(string $id, string $token): self
+    {
+        throw new self(\sprintf('User with id %s and token %s not found', $id, $token));
+    }
 
     // public static function fromUserIdAndResetPasswordToken(string $id, string $resetPasswordToken): self
     // {
