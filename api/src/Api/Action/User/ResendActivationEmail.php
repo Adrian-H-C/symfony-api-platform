@@ -20,10 +20,10 @@ class ResendActivationEmail
         $this->activationEmailService = $activationEmailService;
     }
 
-    // /**
-    //  * @throws ORMException
-    //  * @throws OptimisticLockException
-    //  */
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
     public function __invoke(Request $request): JsonResponse
     {
         $this->activationEmailService->resend(RequestService::getField($request, 'email'));

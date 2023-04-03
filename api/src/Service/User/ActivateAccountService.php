@@ -21,34 +21,34 @@ class ActivateAccountService
     }
     
     // Borrar
-    public function activate(Request $request, string $id): User
-    {
-        $user = $this->userRepository->findOneInactiveByIdAndTokenOrFail(
-          $id,
-          RequestService::getField($request, 'token')
-        );
-
-        $user->setActive(true);
-        $user->setToken(null);
-        
-        $this->userRepository->save($user);
-
-        return $user;
-    }
-
-    // /**
-    //  * @throws ORMException
-    //  * @throws OptimisticLockException
-    //  */
-    // public function activate(string $id, string $token): User
+    // public function activate(Request $request, string $id): User
     // {
-    //     $user = $this->userRepository->findOneInactiveByIdAndTokenOrFail($id, $token);
+    //     $user = $this->userRepository->findOneInactiveByIdAndTokenOrFail(
+    //       $id,
+    //       RequestService::getField($request, 'token')
+    //     );
 
     //     $user->setActive(true);
     //     $user->setToken(null);
-
+        
     //     $this->userRepository->save($user);
 
     //     return $user;
     // }
+
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function activate(string $id, string $token): User
+    {
+        $user = $this->userRepository->findOneInactiveByIdAndTokenOrFail($id, $token);
+
+        $user->setActive(true);
+        $user->setToken(null);
+
+        $this->userRepository->save($user);
+
+        return $user;
+    }
 }

@@ -26,8 +26,7 @@ class RequestResetPassword
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $this->resetPasswordService->send($request);
-        // $this->resetPasswordService->send(RequestService::getField($request, 'email'));
+        $this->resetPasswordService->send(RequestService::getField($request, 'email'));
 
         return new JsonResponse(['message' => 'Request reset password email sent']);
     }

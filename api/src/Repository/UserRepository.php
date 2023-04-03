@@ -16,14 +16,14 @@ class UserRepository extends BaseRepository
         return User::class;
     }
 
-    // public function findOneByIdOrFail(string $id): User
-    // {
-    //     if (null === $user = $this->objectRepository->find($id)) {
-    //         throw UserNotFoundException::fromUserId($id);
-    //     }
+    public function findOneByIdOrFail(string $id): User
+    {
+        if (null === $user = $this->objectRepository->find($id)) {
+            throw UserNotFoundException::fromUserId($id);
+        }
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     public function findOneByEmailOrFail(string $email): User
     {
@@ -43,14 +43,14 @@ class UserRepository extends BaseRepository
         return $user;
     }
 
-    // public function findOneByIdAndResetPasswordToken(string $id, string $resetPasswordToken): User
-    // {
-    //     if (null === $user = $this->objectRepository->findOneBy(['id' => $id, 'resetPasswordToken' => $resetPasswordToken])) {
-    //         throw UserNotFoundException::fromUserIdAndResetPasswordToken($id, $resetPasswordToken);
-    //     }
+    public function findOneByIdAndResetPasswordToken(string $id, string $resetPasswordToken): User
+    {
+        if (null === $user = $this->objectRepository->findOneBy(['id' => $id, 'resetPasswordToken' => $resetPasswordToken])) {
+            throw UserNotFoundException::fromUserIdAndResetPasswordToken($id, $resetPasswordToken);
+        }
 
-    //     return $user;
-    // }
+        return $user;
+    }
 
     /**
      * @throws ORMException

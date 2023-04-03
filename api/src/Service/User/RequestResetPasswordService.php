@@ -26,30 +26,13 @@ class RequestResetPasswordService
     }
 
     // Borrar
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function send(Request $request): void
-    {
-        $user = $this->userRepository->findOneByEmailOrFail(RequestService::getField($request, 'email'));
-        $user->setResetPasswordToken(\sha1(\uniqid()));
-
-        $this->userRepository->save($user);
-
-        $this->messageBus->dispatch(
-            new RequestResetPasswordMessage($user->getId(), $user->getEmail(), $user->getResetPasswordToken()),
-            [new AmqpStamp(RoutingKey::USER_QUEUE)]
-        );
-    }
-
     // /**
     //  * @throws ORMException
     //  * @throws OptimisticLockException
     //  */
-    // public function send(string $email): void
+    // public function send(Request $request): void
     // {
-        // $user = $this->userRepository->findOneByEmailOrFail($email);
+    //     $user = $this->userRepository->findOneByEmailOrFail(RequestService::getField($request, 'email'));
     //     $user->setResetPasswordToken(\sha1(\uniqid()));
 
     //     $this->userRepository->save($user);
@@ -59,4 +42,21 @@ class RequestResetPasswordService
     //         [new AmqpStamp(RoutingKey::USER_QUEUE)]
     //     );
     // }
+
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function send(string $email): void
+    {
+        $user = $this->userRepository->findOneByEmailOrFail($email);
+        $user->setResetPasswordToken(\sha1(\uniqid()));
+
+        $this->userRepository->save($user);
+
+        $this->messageBus->dispatch(
+            new RequestResetPasswordMessage($user->getId(), $user->getEmail(), $user->getResetPasswordToken()),
+            [new AmqpStamp(RoutingKey::USER_QUEUE)]
+        );
+    }
 }
