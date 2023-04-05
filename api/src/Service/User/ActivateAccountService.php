@@ -19,7 +19,7 @@ class ActivateAccountService
     {
         $this->userRepository = $userRepository;
     }
-    
+
     // Borrar
     // public function activate(Request $request, string $id): User
     // {
@@ -30,7 +30,7 @@ class ActivateAccountService
 
     //     $user->setActive(true);
     //     $user->setToken(null);
-        
+
     //     $this->userRepository->save($user);
 
     //     return $user;

@@ -29,7 +29,7 @@ class ResetPassword
     // {
     //     return $this->resetPasswordService->reset($request);
     // }
-     
+
     public function __invoke(Request $request, string $id): User
     {
         return $this->resetPasswordService->reset(

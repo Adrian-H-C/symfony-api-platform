@@ -19,7 +19,7 @@ class Register
     }
 
     public function __invoke(Request $request): User
-    {        
+    {
         return $this->userRegisterService->create(
             RequestService::getField($request, 'name'),
             RequestService::getField($request, 'email'),

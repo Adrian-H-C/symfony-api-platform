@@ -12,8 +12,8 @@ use App\Repository\UserRepository;
 use App\Service\Password\EncoderService;
 use App\Service\Request\RequestService;
 use Doctrine\ORM\ORMException;
-use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 class UserRegisterService
@@ -55,7 +55,6 @@ class UserRegisterService
 
     //     return $user;
     // }
-
 
     public function create(string $name, string $email, string $password): User
     {

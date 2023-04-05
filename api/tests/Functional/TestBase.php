@@ -8,6 +8,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
 use Hautelook\AliceBundle\PhpUnit\RecreateDatabaseTrait;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
+use PDO;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,20 +35,20 @@ class TestBase extends WebTestCase
             );
         }
 
-    //     if (null === self::$peter) {
-    //         self::$peter = clone self::$client;
-    //         $this->createAuthenticatedUser(self::$peter, 'peter@api.com');
-    //     }
+        if (null === self::$peter) {
+            self::$peter = clone self::$client;
+            $this->createAuthenticatedUser(self::$peter, 'peter@api.com');
+        }
 
-    //     if (null === self::$brian) {
-    //         self::$brian = clone self::$client;
-    //         $this->createAuthenticatedUser(self::$brian, 'brian@api.com');
-    //     }
+        if (null === self::$brian) {
+            self::$brian = clone self::$client;
+            $this->createAuthenticatedUser(self::$brian, 'brian@api.com');
+        }
 
-    //     if (null === self::$roger) {
-    //         self::$roger = clone self::$client;
-    //         $this->createAuthenticatedUser(self::$roger, 'roger@api.com');
-    //     }
+        if (null === self::$roger) {
+            self::$roger = clone self::$client;
+            $this->createAuthenticatedUser(self::$roger, 'roger@api.com');
+        }
     }
 
     private function createAuthenticatedUser(KernelBrowser &$client, string $email): void
@@ -84,58 +85,16 @@ class TestBase extends WebTestCase
      */
     protected function getPeterId()
     {
-        return $this->initDbConnection()->query('SELECT id FROM user WHERE email = "peter@api.com"')->fetchColumn(0);
+        return $this->initDbConnection()->query('SELECT id FROM user WHERE email = "brian@api.com"')->fetchColumn(0);
+
+        // 404
+        // $stmt = $this->initDbConnection()->query('SELECT id FROM user WHERE email = "peter@api.com"');
+        // $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        // return $row['id'];
+
+        // 404
+        // return $id = '90416567-56bd-4b5a-9a23-90ec6dd9f596';
     }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getPeterGroupId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM user_group WHERE name = "Peter Group"')->fetchColumn(0);
-    // }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getPeterExpenseCategoryId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM category WHERE name = "Peter Expense Category"')->fetchColumn(0);
-    // }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getPeterGroupExpenseCategoryId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM category WHERE name = "Peter Group Expense Category"')->fetchColumn(0);
-    // }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getPeterMovementId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM movement WHERE amount = 100')->fetchColumn(0);
-    // }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getPeterGroupMovementId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM movement WHERE amount = 1000')->fetchColumn(0);
-    // }
 
     /**
      * @return false|mixed
@@ -146,54 +105,4 @@ class TestBase extends WebTestCase
     {
         return $this->initDbConnection()->query('SELECT id FROM user WHERE email = "brian@api.com"')->fetchColumn(0);
     }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getBrianGroupId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM user_group WHERE name = "Brian Group"')->fetchColumn(0);
-    // }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getBrianExpenseCategoryId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM category WHERE name = "Brian Expense Category"')->fetchColumn(0);
-    // }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getBrianGroupExpenseCategoryId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM category WHERE name = "Brian Group Expense Category"')->fetchColumn(0);
-    // }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getBrianMovementId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM movement WHERE amount = 200')->fetchColumn(0);
-    // }
-
-    // /**
-    //  * @return false|mixed
-    //  *
-    //  * @throws DBALException
-    //  */
-    // protected function getBrianGroupMovementId()
-    // {
-    //     return $this->initDbConnection()->query('SELECT id FROM movement WHERE amount = 2000')->fetchColumn(0);
-    // }
 }

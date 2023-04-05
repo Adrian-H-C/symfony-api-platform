@@ -21,3 +21,10 @@ framework:
             'App\Messenger\Message\UserRegisteredMessage': amqp_user
             'App\Messenger\Message\RequestResetPasswordMessage': amqp_user
         #     'App\Messenger\Message\GroupRequestMessage': amqp_group
+
+when@test:
+    framework:
+        messenger:
+            transports:
+                amqp_user: 'in-memory://'
+                # amqp_group: 'in-memory://'
