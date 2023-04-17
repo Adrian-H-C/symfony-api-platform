@@ -29,24 +29,24 @@ class ChangePasswordActionTest extends UserTestBase
         $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
     }
 
-    // public function testChangePasswordWithInvalidOldPassword(): void
-    // {
-    //     $payload = [
-    //         'oldPassword' => 'non-a-good-one',
-    //         'newPassword' => 'new-password',
-    //     ];
+    public function testChangePasswordWithInvalidOldPassword(): void
+    {
+        $payload = [
+            'oldPassword' => 'non-a-good-one',
+            'newPassword' => 'new-password',
+        ];
 
-    //     self::$peter->request(
-    //         'PUT',
-    //         \sprintf('%s/%s/change_password', $this->endpoint, $this->getPeterId()),
-    //         [],
-    //         [],
-    //         [],
-    //         \json_encode($payload)
-    //     );
+        self::$peter->request(
+            'PUT',
+            \sprintf('%s/%s/change_password', $this->endpoint, $this->getPeterId()),
+            [],
+            [],
+            [],
+            \json_encode($payload)
+        );
 
-    //     $response = self::$peter->getResponse();
+        $response = self::$peter->getResponse();
 
-    //     $this->assertEquals(JsonResponse::HTTP_BAD_REQUEST, $response->getStatusCode());
-    // }
+        $this->assertEquals(JsonResponse::HTTP_BAD_REQUEST, $response->getStatusCode());
+    }
 }
