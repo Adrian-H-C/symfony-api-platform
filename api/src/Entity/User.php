@@ -21,7 +21,7 @@ class User implements UserInterface
     private bool $active;
     private \DateTime $createdAt;
     private \DateTime $updatedAt;
-    // private Collection $groups;
+    private Collection $groups;
     // private Collection $categories;
     // private Collection $movements;
 
@@ -37,7 +37,7 @@ class User implements UserInterface
         $this->active = false;
         $this->createdAt = new \DateTime();
         $this->markAsUpdated();
-        // $this->groups = new ArrayCollection();
+        $this->groups = new ArrayCollection();
         // $this->categories = new ArrayCollection();
         // $this->movements = new ArrayCollection();
     }
@@ -159,34 +159,34 @@ class User implements UserInterface
         return $this->id === $user->getId();
     }
 
-    // /**
-    //  * @return Collection|Group[]
-    //  */
-    // public function getGroups(): Collection
-    // {
-    //     return $this->groups;
-    // }
+    /**
+     * @return Collection|Group[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
 
-    // public function addGroup(Group $group): void
-    // {
-    //     if ($this->groups->contains($group)) {
-    //         return;
-    //     }
+    public function addGroup(Group $group): void
+    {
+        if ($this->groups->contains($group)) {
+            return;
+        }
 
-    //     $this->groups->add($group);
-    // }
+        $this->groups->add($group);
+    }
 
-    // public function removeGroup(Group $group): void
-    // {
-    //     if ($this->groups->contains($group)) {
-    //         $this->groups->removeElement($group);
-    //     }
-    // }
+    public function removeGroup(Group $group): void
+    {
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+        }
+    }
 
-    // public function isMemberOfGroup(Group $group): bool
-    // {
-    //     return $this->groups->contains($group);
-    // }
+    public function isMemberOfGroup(Group $group): bool
+    {
+        return $this->groups->contains($group);
+    }
 
     // /**
     //  * @return Collection|Category[]

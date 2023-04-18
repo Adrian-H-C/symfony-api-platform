@@ -96,6 +96,11 @@ class TestBase extends WebTestCase
         // return $id = '90416567-56bd-4b5a-9a23-90ec6dd9f596';
     }
 
+    protected function getPeterGroupId()
+    {
+        return $this->initDbConnection()->query('SELECT id FROM user_group WHERE name = "Peter Group"')->fetchColumn(0);
+    }
+
     /**
      * @return false|mixed
      *
@@ -104,5 +109,10 @@ class TestBase extends WebTestCase
     protected function getBrianId()
     {
         return $this->initDbConnection()->query('SELECT id FROM user WHERE email = "brian@api.com"')->fetchColumn(0);
+    }
+
+    protected function getBrianGroupId()
+    {
+        return $this->initDbConnection()->query('SELECT id FROM user_group WHERE name = "Brian Group"')->fetchColumn(0);
     }
 }
