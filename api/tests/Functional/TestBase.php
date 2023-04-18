@@ -85,7 +85,7 @@ class TestBase extends WebTestCase
      */
     protected function getPeterId()
     {
-        return $this->initDbConnection()->query('SELECT id FROM user WHERE email = "brian@api.com"')->fetchColumn(0);
+        return $this->initDbConnection()->query('SELECT id FROM user WHERE email = "peter@api.com"')->fetchColumn(0);
 
         // 404
         // $stmt = $this->initDbConnection()->query('SELECT id FROM user WHERE email = "peter@api.com"');

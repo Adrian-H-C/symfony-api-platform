@@ -38,4 +38,4 @@ when@test:
         messenger:
             transports: 
                 amqp_user: 'in-memory://'
-                # amqp_group: 'in-memory://'
+                amqp_group: 'in-memory://'

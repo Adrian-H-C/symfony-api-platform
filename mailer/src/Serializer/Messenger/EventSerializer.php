@@ -26,7 +26,7 @@ class EventSerializer extends Serializer
         $map = [
             'App\Messenger\Message\UserRegisteredMessage' => UserRegisteredMessage::class,
             'App\Messenger\Message\RequestResetPasswordMessage' => RequestResetPasswordMessage::class,
-    //         'App\Messenger\Message\GroupRequestMessage' => GroupRequestMessage::class,
+            'App\Messenger\Message\GroupRequestMessage' => GroupRequestMessage::class,
         ];
 
         if (\array_key_exists($type, $map)) {
